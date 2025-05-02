@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Programs Collection</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #1a5276;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            margin-top: 30px;
+            padding: 10px;
+            background-color: #eaf2f8;
+            border-left: 4px solid #3498db;
+        }
+        
+        h3 {
+            margin-top: 25px;
+            color: #2874a6;
+        }
+        
+        .code-container {
+            position: relative;
+            margin: 20px 0;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            border-left: 4px solid #3498db;
+            overflow: hidden;
+        }
+        
+        pre {
+            margin: 0;
+            padding: 15px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.4;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            padding: 5px 10px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background-color 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .copy-btn.copied {
+            background-color: #27ae60;
+        }
+        
+        .output {
+            background-color: #e8f8f5;
+            padding: 10px 15px;
+            border-left: 4px solid #1abc9c;
+            margin: 15px 0;
+            font-family: monospace;
+        }
+        
+        .output-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #16a085;
+        }
+    </style>
+</head>
+<body>
+    <h1>Crypto Programs Collection</h1>
+
+    <h2>1 (A) Write a C program that contains a string (char pointer) with a value 'Hello World'. The program should XOR, AND and OR each character in this string with 0 and displays the result.</h2>
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>string = "Hello World"
+
+print("A. Bitwise XOR, AND, OR with 0")
+for char in string:
+    xor_result = ord(char) ^ 0
+    and_result = ord(char) & 0
+    or_result = ord(char) | 0
+    print(f"Char: '{char}' -> XOR: {xor_result}, AND: {and_result}, OR: {or_result}")</code></pre>
+    </div>
+
+    <h2>1 (B) Write a C program that contains a string (char pointer) with a value 'Hello World'. The program should XOR, AND and OR each character in this string with 127 and displays the result.</h2>
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>string = "Hello World"
+
+print("\nB. Bitwise XOR, AND, OR with 127")
+for char in string:
+    xor_result = ord(char) ^ 127
+    and_result = ord(char) & 127
+    or_result = ord(char) | 127
+    print(f"Char: '{char}' -> XOR: {xor_result}, AND: {and_result}, OR: {or_result}")</code></pre>
+    </div>
+
+    <h2>1 (C) Write a C program that contains a string (char pointer) with a value 'Hello World'. The program should bitwise OR, left shift and right shift each character in this string and displays the result.</h2>
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>string = "Hello World"
+
+print("\nC. Bitwise OR (with 1), Left Shift (by 1), Right Shift (by 1)")
+for char in string:
+    or_result = ord(char) | 1
+    left_shift_result = ord(char) << 1
+    right_shift_result = ord(char) >> 1
+    print(f"Char: '{char}' -> OR: {or_result}, Left Shift: {left_shift_result}, Right Shift: {right_shift_result}")</code></pre>
+    </div>
+
+    <h2>2 To implement Caesar Cipher Encryption - Decryption</h2>
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>def caesar_encrypt(text, shift):
+    result = ""
+
+    for char in text:
+        if char.isalpha():
+            offset = 65 if char.isupper() else 97
+            encrypted_char = chr((ord(char) - offset + shift) % 26 + offset)
+            result += encrypted_char
+        else:
+            result += char 
+    return result
+
+def caesar_decrypt(cipher_text, shift):
+    return caesar_encrypt(cipher_text, -shift) 
+
+plaintext = "Hello World"
+shift = 3
+
+encrypted = caesar_encrypt(plaintext, shift)
+decrypted = caesar_decrypt(encrypted, shift)
+
+print("Original Text: ", plaintext)
+print("Encrypted Text:", encrypted)
+print("Decrypted Text:", decrypted)</code></pre>
+    </div>
+
+    <h2>3 To implement Mono-alphabetic Cipher Encryption – Decryption.</h2>
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>import string
+
+plain_alphabet = string.ascii_lowercase
+cipher_alphabet = "QWERTYUIOPASDFGHJKLZXCVBNM".lower()
+
+encryption_dict = dict(zip(plain_alphabet, cipher_alphabet))
+decryption_dict = dict(zip(cipher_alphabet, plain_alphabet))
+
+def mono_encrypt(text):
+    result = ""
+    for char in text:
+        if char.isalpha():
+            lower_char = char.lower()
+            encrypted_char = encryption_dict[lower_char]
+            result += encrypted_char.upper() if char.isupper() else encrypted_char
+        else:
+            result += char
+    return result
+
+def mono_decrypt(cipher_text):
+    result = ""
+    for char in cipher_text:
+        if char.isalpha():
+            lower_char = char.lower()
+            decrypted_char = decryption_dict[lower_char]
+            result += decrypted_char.upper() if char.isupper() else decrypted_char
+        else:
+            result += char
+    return result
+
+plaintext = "Hello World"
+encrypted = mono_encrypt(plaintext)
+decrypted = mono_decrypt(encrypted)
+
+print("Original Text: ", plaintext)
+print("Encrypted Text:", encrypted)
+print("Decrypted Text:", decrypted)</code></pre>
+    </div>
+
+    <h2>4 To implement Hill Cipher Encryption</h2>
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>import numpy as np
+
+def text_to_numbers(text):
+    return [ord(char) - ord('A') for char in text.upper() if char.isalpha()]
+
+def numbers_to_text(numbers):
+    return ''.join(chr(num % 26 + ord('A')) for num in numbers)
+
+def pad_text(text):
+    return text + ('X' if len(text) % 2 != 0 else '')
+
+def modinv(a, m):
+    for i in range(1, m):
+        if (a * i) % m == 1:
+            return i
+    raise ValueError(f"No modular inverse for {a} mod {m}")
+
+def matrix_mod_inv(matrix, mod):
+    det = int(np.round(np.linalg.det(matrix))) % mod
+    det_inv = modinv(det, mod)
+    inv_matrix = np.array([[matrix[1][1], -matrix[0][1]],
+                           [-matrix[1][0], matrix[0][0]]])
+    inv_matrix = (det_inv * inv_matrix) % mod
+    return inv_matrix
+
+def hill_encrypt(plaintext, key_matrix):
+    plaintext = pad_text(plaintext)
+    plaintext_nums = text_to_numbers(plaintext)
+
+    matrix = np.array(plaintext_nums).reshape(-1, 2).T
+    key = np.array(key_matrix)
+
+    encrypted_matrix = np.dot(key, matrix) % 26
+    encrypted_nums = encrypted_matrix.T.flatten()
+    return numbers_to_text(encrypted_nums)
+
+def hill_decrypt(ciphertext, key_matrix):
+    ciphertext_nums = text_to_numbers(ciphertext)
+    matrix = np.array(ciphertext_nums).reshape(-1, 2).T
+    key = np.array(key_matrix)
+
+    key_inv = matrix_mod_inv(key, 26)
+    decrypted_matrix = np.dot(key_inv, matrix) % 26
+    decrypted_nums = decrypted_matrix.T.flatten()
+    return numbers_to_text(decrypted_nums)
+
+key_matrix = [[3, 3],
+              [2, 5]]
+
+plaintext = "HELLO"
+encrypted = hill_encrypt(plaintext, key_matrix)
+decrypted = hill_decrypt(encrypted, key_matrix)
+
+print("Plaintext: ", plaintext)
+print("Encrypted: ", encrypted)
+print("Decrypted: ", decrypted)</code></pre>
+    </div>
+
+    <h2>5 To implement Poly-alphabetic Cipher (Vigener Cipher) Technique</h2>
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>def generate_key(text, key):
+    key = key.upper()
+    key = list(key)
+    if len(text) == len(key):
+        return key
+    else:
+        for i in range(len(text) - len(key)):
+            key.append(key[i % len(key)])
+    return "".join(key)
+
+def vigenere_encrypt(plaintext, key):
+    plaintext = plaintext.upper()
+    key = generate_key(plaintext, key)
+    cipher_text = ""
+
+    for p_char, k_char in zip(plaintext, key):
+        if p_char.isalpha():
+            encrypted_char = chr(((ord(p_char) - 65 + ord(k_char) - 65) % 26) + 65)
+            cipher_text += encrypted_char
+        else:
+            cipher_text += p_char
+    return cipher_text
+
+def vigenere_decrypt(cipher_text, key):
+    key = generate_key(cipher_text, key)
+    original_text = ""
+
+    for c_char, k_char in zip(cipher_text, key):
+        if c_char.isalpha():
+            decrypted_char = chr(((ord(c_char) - ord(k_char) + 26) % 26) + 65)
+            original_text += decrypted_char
+        else:
+            original_text += c_char 
+    return original_text
+
+plaintext = "HELLO WORLD"
+key = "KEY"
+
+encrypted = vigenere_encrypt(plaintext, key)
+decrypted = vigenere_decrypt(encrypted, key)
+
+print("Plaintext: ", plaintext)
+print("Key:       ", key)
+print("Encrypted: ", encrypted)
+print("Decrypted: ", decrypted)</code></pre>
+    </div>
+
+    <h2>6 To implement Play-Fair Cipher Technique.</h2>
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>def prepare_text(text):
+    text = text.upper().replace("J", "I").replace(" ", "")
+    i = 0
+    prepared = ""
+    while i < len(text):
+        a = text[i]
+        b = text[i + 1] if i + 1 < len(text) else "X"
+        if a == b:
+            prepared += a + "X"
+            i += 1
+        else:
+            prepared += a + b
+            i += 2
+    if len(prepared) % 2 != 0:
+        prepared += "X"
+    return prepared
+
+def generate_matrix(key):
+    key = key.upper().replace("J", "I")
+    matrix = []
+    seen = set()
+    for char in key:
+        if char.isalpha() and char not in seen:
+            seen.add(char)
+            matrix.append(char)
+    for char in "ABCDEFGHIKLMNOPQRSTUVWXYZ":
+        if char not in seen:
+            seen.add(char)
+            matrix.append(char)
+    return [matrix[i:i+5] for i in range(0, 25, 5)]
+
+def find_position(matrix, char):
+    for row in range(5):
+        for col in range(5):
+            if matrix[row][col] == char:
+                return row, col
+    return None
+
+def playfair_encrypt(text, matrix):
+    text = prepare_text(text)
+    cipher = ""
+    for i in range(0, len(text), 2):
+        a, b = text[i], text[i+1]
+        row1, col1 = find_position(matrix, a)
+        row2, col2 = find_position(matrix, b)
+
+        if row1 == row2:
+            cipher += matrix[row1][(col1 + 1) % 5]
+            cipher += matrix[row2][(col2 + 1) % 5]
+        elif col1 == col2:
+            cipher += matrix[(row1 + 1) % 5][col1]
+            cipher += matrix[(row2 + 1) % 5][col2]
+        else:
+            cipher += matrix[row1][col2]
+            cipher += matrix[row2][col1]
+    return cipher
+
+def playfair_decrypt(cipher_text, matrix):
+    plain = ""
+    for i in range(0, len(cipher_text), 2):
+        a, b = cipher_text[i], cipher_text[i+1]
+        row1, col1 = find_position(matrix, a)
+        row2, col2 = find_position(matrix, b)
+
+        if row1 == row2:
+            plain += matrix[row1][(col1 - 1) % 5]
+            plain += matrix[row2][(col2 - 1) % 5]
+        elif col1 == col2:
+            plain += matrix[(row1 - 1) % 5][col1]
+            plain += matrix[(row2 - 1) % 5][col2]
+        else:
+            plain += matrix[row1][col2]
+            plain += matrix[row2][col1]
+    return plain
+
+key = "MONARCHY"
+plaintext = "HELLO WORLD"
+
+matrix = generate_matrix(key)
+encrypted = playfair_encrypt(plaintext, matrix)
+decrypted = playfair_decrypt(encrypted, matrix)
+
+print("Plaintext: ", plaintext)
+print("Key:       ", key)
+print("Encrypted: ", encrypted)
+print("Decrypted: ", decrypted)</code></pre>
+    </div>
+
+    <h2>7 (A) Write a program to implement Rail-Fence Technique.</h2>
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>def rail_fence_encrypt(text, rails):
+    fence = [[] for _ in range(rails)]
+    rail = 0
+    direction = 1
+
+    for char in text:
+        fence[rail].append(char)
+        rail += direction
+        if rail == 0 or rail == rails - 1:
+            direction *= -1
+
+    return ''.join(''.join(row) for row in fence)
+
+def rail_fence_decrypt(cipher, rails):
+    pattern = list(range(rails)) + list(range(rails - 2, 0, -1))
+    pattern = pattern * (len(cipher) // len(pattern) + 1)
+
+    rail_lengths = [0] * rails
+    for i in range(len(cipher)):
+        rail_lengths[pattern[i]] += 1
+
+    rails_data = []
+    idx = 0
+    for r in rail_lengths:
+        rails_data.append(list(cipher[idx:idx + r]))
+        idx += r
+
+    result = ''
+    rail_ptr = [0] * rails
+    for i in range(len(cipher)):
+        r = pattern[i]
+        result += rails_data[r][rail_ptr[r]]
+        rail_ptr[r] += 1
+
+    return result
+
+text = "HELLO WORLD"
+rails = 3
+
+encrypted = rail_fence_encrypt(text.replace(" ", ""), rails)
+decrypted = rail_fence_decrypt(encrypted, rails)
+
+print("Rail Fence Cipher")
+print("Encrypted:", encrypted)
+print("Decrypted:", decrypted)</code></pre>
+    </div>
+
+    <h2>7 (B) Write a program to implement Simple columnar Encryption Technique.</h2>
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>def columnar_encrypt(text, key):
+    key_order = sorted(list(key))
+    num_cols = len(key)
+    num_rows = (len(text) + num_cols - 1) // num_cols
+    padded_text = text.ljust(num_rows * num_cols, 'X') 
+
+    matrix = [list(padded_text[i:i + num_cols]) for i in range(0, len(padded_text), num_cols)]
+
+    encrypted = ''
+    for k in sorted((char, i) for i, char in enumerate(key)):
+        col_idx = k[1]
+        for row in matrix:
+            encrypted += row[col_idx]
+
+    return encrypted
+
+def columnar_decrypt(cipher, key):
+    key_order = sorted(list(key))
+    num_cols = len(key)
+    num_rows = len(cipher) // num_cols
+
+    sorted_key = sorted((char, i) for i, char in enumerate(key))
+    col_lengths = [num_rows] * num_cols
+    col_data = [''] * num_cols
+
+    idx = 0
+    for _, col_idx in sorted_key:
+        col_data[col_idx] = cipher[idx:idx + col_lengths[col_idx]]
+        idx += col_lengths[col_idx]
+
+    plaintext = ''
+    for i in range(num_rows):
+        for j in range(num_cols):
+            plaintext += col_data[j][i]
+
+    return plaintext.rstrip('X')
+
+text = "HELLO WORLD"
+key = "ZEBRAS"
+
+encrypted = columnar_encrypt(text.replace(" ", ""), key)
+decrypted = columnar_decrypt(encrypted, key)
+
+print("\nSimple Columnar Cipher")
+print("Encrypted:", encrypted)
+print("Decrypted:", decrypted)</code></pre>
+    </div>
+
+    <h2>8 To implement the S-DES algorithm for data encryption.</h2>
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>P10 = [3, 5, 2, 7, 4, 10, 1, 9, 8, 6]
+P8  = [6, 3, 7, 4, 8, 5, 10, 9]
+IP  = [2, 6, 3, 1, 4, 8, 5, 7]
+IP_INV = [4, 1, 3, 5, 7, 2, 8, 6]
+EP = [4, 1, 2, 3, 2, 3, 4, 1]
+P4 = [2, 4, 3, 1]
+
+S0 = [[[1, 0], [0, 1], [3, 3], [2, 2]],
+      [[3, 3], [2, 2], [1, 0], [0, 1]],
+      [[0, 1], [2, 2], [1, 0], [3, 3]],
+      [[3, 3], [1, 0], [3, 3], [2, 2]]]
+
+S1 = [[[0, 0], [1, 1], [2, 2], [3, 3]],
+      [[2, 2], [0, 0], [1, 1], [3, 3]],
+      [[3, 3], [0, 0], [1, 1], [2, 2]],
+      [[2, 2], [1, 1], [0, 0], [3, 3]]]
+
+def permute(bits, pattern):
+    return [bits[i - 1] for i in pattern]
+
+def left_shift(bits, n):
+    return bits[n:] + bits[:n]
+
+def xor(bits1, bits2):
+    return [b1 ^ b2 for b1, b2 in zip(bits1, bits2)]
+
+def sbox_lookup(bits, sbox):
+    row = (bits[0] << 1) | bits[3]
+    col = (bits[1] << 1) | bits[2]
+    val = sbox[row][col]
+    return [(val[0] >> 1) & 1, val[0] & 1]
+
+def fk(bits, subkey):
+    left, right = bits[:4], bits[4:]
+    ep = permute(right, EP)
+    xor_result = xor(ep, subkey)
+    s0_out = sbox_lookup(xor_result[:4], S0)
+    s1_out = sbox_lookup(xor_result[4:], S1)
+    sbox_out = permute(s0_out + s1_out, P4)
+    return xor(left, sbox_out) + right
+
+def switch(bits):
+    return bits[4:] + bits[:4]
+
+def generate_keys(key):
+    key = permute(key, P10)
+    left, right = key[:5], key[5:]
+    left1, right1 = left_shift(left, 1), left_shift(right, 1)
+    K1 = permute(left1 + right1, P8)
+    left2, right2 = left_shift(left1, 2), left_shift(right1, 2)
+    K2 = permute(left2 + right2, P8)
+    return K1, K2
+
+def sdes_encrypt(plain_bits, key_bits):
+    K1, K2 = generate_keys(key_bits)
+    bits = permute(plain_bits, IP)
+    bits = fk(bits, K1)
+    bits = switch(bits)
+    bits = fk(bits, K2)
+    return permute(bits, IP_INV)
+
+def sdes_decrypt(cipher_bits, key_bits):
+    K1, K2 = generate_keys(key_bits)
+    bits = permute(cipher_bits, IP)
+    bits = fk(bits, K2)
+    bits = switch(bits)
+    bits = fk(bits, K1)
+    return permute(bits, IP_INV)
+
+def str_to_bitlist(s):
+    return [int(b) for b in s]
+
+def bitlist_to_str(b):
+    return ''.join(str(bit) for bit in b)
+
+plaintext = "10101010"  
+key = "1010000010"     
+
+plain_bits = str_to_bitlist(plaintext)
+key_bits = str_to_bitlist(key)
+
+encrypted_bits = sdes_encrypt(plain_bits, key_bits)
+decrypted_bits = sdes_decrypt(encrypted_bits, key_bits)
+
+print("Plaintext:  ", plaintext)
+print("Encrypted:  ", bitlist_to_str(encrypted_bits))
+print("Decrypted:  ", bitlist_to_str(decrypted_bits))</code></pre>
+    </div>
+
+    <h2>9 Write a program to implement RSA asymmetric (public key and private key)-Encryption</h2>
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>import random
+
+def gcd(a, b):
+    while b:
+        a, b = b, a % b
+    return a
+
+def modinv(a, m):
+    m0, x0, x1 = m, 0, 1
+    if m == 1:
+        return 0
+    while a > 1:
+        q = a // m
+        a, m = m, a % m
+        x0, x1 = x1 - q * x0, x0
+    return x1 + m0 if x1 < 0 else x1
+
+def is_prime(n):
+    if n <= 1: return False
+    for i in range(2, int(n**0.5) + 1):
+        if n % i == 0: return False
+    return True
+
+def generate_keys():
+    primes = [i for i in range(50, 100) if is_prime(i)]
+    p = random.choice(primes)
+    q = random.choice([x for x in primes if x != p])
+    n = p * q
+    phi = (p - 1) * (q - 1)
+
+    e = random.choice([x for x in range(2, phi) if gcd(x, phi) == 1])
+    d = modinv(e, phi)
+    return (e, n), (d, n) 
+
+def encrypt(message, public_key):
+    e, n = public_key
+    cipher = [pow(ord(char), e, n) for char in message]
+    return cipher
+
+def decrypt(cipher, private_key):
+    d, n = private_key
+    message = ''.join([chr(pow(c, d, n)) for c in cipher])
+    return message
+
+public_key, private_key = generate_keys()
+
+message = "HELLO"
+cipher = encrypt(message, public_key)
+decrypted = decrypt(cipher, private_key)
+
+print("Public Key: ", public_key)
+print("Private Key:", private_key)
+print("Original:   ", message)
+print("Encrypted:  ", cipher)
+print("Decrypted:  ", decrypted)</code></pre>
+    </div>
+
+    <h2>10 Write a program to generate digital signature using Hash code.</h2>
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>import hashlib
+import random
+
+def gcd(a, b):
+    while b:
+        a, b = b, a % b
+    return a
+
+def modinv(a, m):
+    m0, x0, x1 = m, 0, 1
+    if m == 1:
+        return 0
+    while a > 1:
+        q = a // m
+        a, m = m, a % m
+        x0, x1 = x1 - q * x0, x0
+    return x1 + m0 if x1 < 0 else x1
+
+def is_prime(n):
+    if n <= 1: return False
+    for i in range(2, int(n**0.5) + 1):
+        if n % i == 0: return False
+    return True
+
+def generate_keys():
+    primes = [i for i in range(50, 100) if is_prime(i)]
+    p = random.choice(primes)
+    q = random.choice([x for x in primes if x != p])
+    n = p * q
+    phi = (p - 1) * (q - 1)
+    e = random.choice([x for x in range(2, phi) if gcd(x, phi) == 1])
+    d = modinv(e, phi)
+    return (e, n), (d, n)
+
+def encrypt(message, public_key):
+    e, n = public_key
+    cipher = [pow(ord(char), e, n) for char in message]
+    return cipher
+
+def decrypt(cipher, private_key):
+    d, n = private_key
+    message = ''.join([chr(pow(c, d, n)) for c in cipher])
+    return message
+
+def generate_signature(message, private_key):
+    message_hash = hashlib.sha256(message.encode()).hexdigest()
+    signature = encrypt(message_hash, private_key)
+    return signature, message_hash
+
+def verify_signature(signature, message, public_key):
+    decrypted_hash = decrypt(signature, public_key)
+    message_hash = hashlib.sha256(message.encode()).hexdigest()
+    return decrypted_hash == message_hash
+
+public_key, private_key = generate_keys()
+
+message = "This is a secret message"
+signature, message_hash = generate_signature(message, private_key)
+
+is_valid = verify_signature(signature, message, public_key)
+
+print("Message:    ", message)
+print("Signature:  ", signature)
+print("Hash:       ", message_hash)
+print("Signature Valid: ", is_valid)</code></pre>
+    </div>
+
+    <h2>13 Study of MD5 hash function and implement the hash code using MD5.</h2>
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>import hashlib
+
+def md5_hash(message):
+    md5 = hashlib.md5()
+    md5.update(message.encode())
+    return md5.hexdigest()
+
+message = "Hello, this is a test message for MD5 hashing!"
+hashed_message = md5_hash(message)
+
+print(f"Original Message: {message}")
+print(f"MD5 Hash: {hashed_message}")</code></pre>
+    </div>
+
+    <h2>14 Study of SHA-1 hash function and implement the hash code using SHA-1.</h2>
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>import hashlib
+
+def sha1_hash(message):
+    sha1 = hashlib.sha1()
+    sha1.update(message.encode())   
+    return sha1.hexdigest()
+
+message = "Hello, this is a test message for SHA-1 hashing!"
+hashed_message = sha1_hash(message)
+
+print(f"Original Message: {message}")
+print(f"SHA-1 Hash: {hashed_message}")</code></pre>
+    </div>
+
+    <h2>15 Write a program to implement transposition Encryption Technique</h2>
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>def create_matrix(plaintext, key):
+    matrix = [''] * len(key)
+    for i in range(len(plaintext)):
+        column = i % len(key)
+        matrix[column] += plaintext[i]
+    return matrix
+
+def transposition_encrypt(plaintext, key):
+    matrix = create_matrix(plaintext, key)
+    sorted_key_indices = sorted(range(len(key)), key=lambda k: key[k])
+    ciphertext = ''.join(''.join(matrix[i]) for i in sorted_key_indices)
+    
+    return ciphertext
+
+def transposition_decrypt(ciphertext, key):
+    num_cols = len(key)
+    num_rows = len(ciphertext) // num_cols
+    if len(ciphertext) % num_cols != 0:
+        num_rows += 1
+    
+    grid = [''] * num_rows
+    column = 0
+    row = 0
+    
+    for char in ciphertext:
+        grid[row] += char
+        row += 1
+        if row == num_rows:
+            row = 0
+            column += 1
+    
+    sorted_key_indices = sorted(range(len(key)), key=lambda k: key[k])
+    decrypted_message = ''.join(''.join(grid[i]) for i in sorted_key_indices)
+    
+    return decrypted_message
+
+plaintext = "HELLOTHISISATEST"
+key = "KEYWORD"
+
+ciphertext = transposition_encrypt(plaintext, key)
+print(f"Ciphertext: {ciphertext}")
+
+decrypted_message = transposition_decrypt(ciphertext, key)
+print(f"Decrypted Message: {decrypted_message}")</code></pre>
+    </div>
+
+    <script>
+        function copyCode(button) {
+            const codeContainer = button.parentElement;
+            const codeElement = codeContainer.querySelector('pre code');
+            const range = document.createRange();
+            range.selectNode(codeElement);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            document.execCommand('copy');
+            window.getSelection().removeAllRanges();
+            
+            button.classList.add('copied');
+            button.textContent = 'Copied!';
+            
+            setTimeout(() => {
+                button.classList.remove('copied');
+                button.textContent = 'Copy';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
